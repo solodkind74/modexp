@@ -1,0 +1,22 @@
+# uv run mlx_lm.lora -c lora_config.yaml
+model: mlx-community/Qwen3-0.6B-bf16
+train: true
+data: data
+adapter_path: adapters
+fine_tune_type: lora
+mask_prompt: true        # only learn from the assistant's JSON, not the prompt
+num_layers: 16           # LoRA on the top 16 of 28 layers
+batch_size: 4
+iters: 600               # ~1.2 epochs over 2000 examples
+learning_rate: 1e-4
+steps_per_report: 25
+steps_per_eval: 100
+val_batches: 25
+save_every: 200
+max_seq_length: 512
+grad_checkpoint: false
+seed: 0
+lora_parameters:
+  rank: 8
+  scale: 20.0
+  dropout: 0.0
